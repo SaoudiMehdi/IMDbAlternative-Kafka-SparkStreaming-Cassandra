@@ -1,0 +1,19 @@
+[
+{
+  "namespace": "util",
+  "type": "record",
+  "name": "Movie",
+  "fields": [
+    {"name": "id", "type": "string", "doc": "Movie ID"},
+    {"name": "rate",  "type": "int"}
+  ]
+},
+{
+  "namespace": "util",
+  "type": "record",
+  "name": "Actor",
+  "fields": [
+    {"name": "name",  "type": "string" }
+  ]
+}
+]
