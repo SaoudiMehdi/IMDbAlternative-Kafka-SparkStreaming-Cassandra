@@ -1,0 +1,7 @@
+/home/mehdi/IdeaProjects/ImdbKafka/src/main/java/model/RatingApiResponse.java
+/home/mehdi/IdeaProjects/ImdbKafka/src/main/java/Runnable/ProducerReviews.java
+/home/mehdi/IdeaProjects/ImdbKafka/src/main/java/Runnable/fetchingData.java
+/home/mehdi/IdeaProjects/ImdbKafka/src/main/java/Runnable/ConsumerReviews.java
+/home/mehdi/IdeaProjects/ImdbKafka/src/main/java/model/AppConfig.java
+/home/mehdi/IdeaProjects/ImdbKafka/src/main/java/client/RatingApi.java
+/home/mehdi/IdeaProjects/ImdbKafka/src/main/java/Runnable/RatingAvroProducerThread.java
