@@ -1,14 +1,13 @@
 package util;
 
 import com.typesafe.config.Config;
-
 public class AppConfig {
-
     private final String bootstrapServers;
     private final String schemaRegistryUrl;
     private final String topicName;
     private final Integer queueCapacity;
     private final Integer producerFrequencyMs;
+        
 
     public AppConfig(Config config) {
         this.bootstrapServers = config.getString("kafka.bootstrap.servers");
@@ -16,7 +15,9 @@ public class AppConfig {
         this.topicName = config.getString("kafka.topic.name");
         this.queueCapacity = config.getInt("app.queue.capacity");
         this.producerFrequencyMs = config.getInt("app.producer.frequency.ms");
+
     }
+
 
 
     public String getBootstrapServers() {
@@ -38,5 +39,4 @@ public class AppConfig {
     public Integer getProducerFrequencyMs() {
         return producerFrequencyMs;
     }
-
 }
