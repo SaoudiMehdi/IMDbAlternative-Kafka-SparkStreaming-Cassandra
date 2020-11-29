@@ -4,8 +4,10 @@
   "type": "record",
   "name": "Movie",
   "fields": [
-    {"name": "id", "type": "string", "doc": "Movie ID"},
-    {"name": "rate",  "type": "int"}
+    {"name": "id", "type": "string"},
+    {"name": "rate",  "type": "double", "default": 0},
+    {"name": "title", "type": "string"},
+    {"name": "titletype", "type": "string"}
   ]
 },
 {
@@ -13,7 +15,12 @@
   "type": "record",
   "name": "Actor",
   "fields": [
-    {"name": "name",  "type": "string" }
+    {"name": "id",  "type": "string" },
+    {"name": "name",  "type": "string" },
+    {"name": "birthDate",  "type": "string" },
+    {"name": "birthPlace",  "type": "string" },
+    {"name": "gender",  "type": "string" },
+    {"name": "reaName",  "type": "string" }
   ]
 }
 ]
