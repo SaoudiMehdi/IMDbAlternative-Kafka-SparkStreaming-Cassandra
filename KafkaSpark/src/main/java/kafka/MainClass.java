@@ -11,7 +11,7 @@ import java.util.concurrent.CountDownLatch;
 
 public class MainClass {
 
-    public static void main(String[] args) throws InterruptedException, UnirestException {
+    public static void main(String[] args) {
         AppConfig appConfig = new AppConfig(ConfigFactory.load());
         CountDownLatch latch = new CountDownLatch(2);
         MovieProducerThread mpt = new MovieProducerThread(appConfig, latch);

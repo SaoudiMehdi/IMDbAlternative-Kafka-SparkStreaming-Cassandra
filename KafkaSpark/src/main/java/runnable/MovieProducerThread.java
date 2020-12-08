@@ -41,10 +41,6 @@ public class MovieProducerThread implements Runnable {
         //properties.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
         //properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "snappy");
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-
-
-        //properties.setProperty("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        //properties.setProperty("value.serializer", "io.confluent.kafka.serializers.KafkaAvroSerializer");
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class);
         properties.put(KafkaAvroSerializerConfig.SCHEMA_REGISTRY_URL_CONFIG, appConfig.getSchemaRegistryUrl());
 

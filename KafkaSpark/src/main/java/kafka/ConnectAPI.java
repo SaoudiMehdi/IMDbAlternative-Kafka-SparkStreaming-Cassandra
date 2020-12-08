@@ -63,7 +63,7 @@ public class ConnectAPI {
                     String year = MovieDescription.getString("year");
                 */
                 //String image_link = hotelDescription.getJSONObject("photo").getJSONObject("images").getJSONObject("medium").getString("url");
-                Movie_LIST.add(new Movie(id, chart));
+                //Movie_LIST.add(new Movie(id, chart));
             }
 
         }
