@@ -9,19 +9,17 @@ public class Actor {
     String birthDate;
     String birthPlace;
     String gender;
-    String realName;
 
     public Actor(){
 
     }
 
-    public Actor(String id, String name, String birthDate, String birthPlace, String gender, String realName) {
+    public Actor(String id, String name, String birthDate, String birthPlace, String gender) {
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;
         this.birthPlace = birthPlace;
         this.gender = gender;
-        this.realName = realName;
     }
 
     public String getId() {
@@ -64,13 +62,6 @@ public class Actor {
         this.gender = gender;
     }
 
-    public String getRealName() {
-        return realName;
-    }
-
-    public void setRealName(String realName) {
-        this.realName = realName;
-    }
 
     @Override
     public String toString() {
@@ -80,7 +71,6 @@ public class Actor {
                 ", birthDate='" + birthDate + '\'' +
                 ", birthPlace='" + birthPlace + '\'' +
                 ", gender='" + gender + '\'' +
-                ", realName='" + realName + '\'' +
                 '}';
     }
 
@@ -91,7 +81,10 @@ public class Actor {
         actorJson.put("birthDate", birthDate);
         actorJson.put("birthPlace", birthPlace);
         actorJson.put("gender", gender);
-        actorJson.put("realName", realName);
         return actorJson;
+    }
+
+    public String[] toArray(){
+        return new String[]{id, name, birthDate, birthPlace, gender};
     }
 }

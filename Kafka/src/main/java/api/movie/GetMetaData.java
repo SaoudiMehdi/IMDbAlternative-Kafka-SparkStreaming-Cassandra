@@ -1,21 +1,32 @@
 package api.movie;
 
 import api.ApiResponse;
+import api.actor.AllFilmography;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import util.Movie;
 
-public class GetMetaData {
-    /*HttpResponse<String> response = Unirest.get("=tt4154756&")
-            .header("x-rapidapi-key", "2787398dd7mshbb323b746979b1fp12f4a0jsn9b2ee9e88420")
-            .header("x-rapidapi-host", "imdb8.p.rapidapi.com")
-            .asString();*/
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+public class GetMetaData {
     private HttpResponse<JsonNode> response;
     private JSONObject dataJson = null;
-    public static String url = "https://imdb8.p.rapidapi.com/title/get-meta-data?ids=";
+    public String url = "https://imdb8.p.rapidapi.com/title/get-meta-data?ids=";
+    private static final String ALL_FILMO_PATH = "src/main/resources/movie_actor/allFilmography.csv";
+    private static final String TOP_RATED_PATH = "src/main/resources/movie/topRatedMovies.csv";
+    private static final String MOVIES_PATH = "src/main/resources/movie/movies.csv";
 
     private int count = 0;
     private String id_movie;
@@ -29,19 +40,90 @@ public class GetMetaData {
     }
 
     public Movie getMovie() {
-        if(!dataJson.isNull(id_movie)){
-            dataJson = (JSONObject) dataJson.get(id_movie);
-
-            String id = id_movie;
+        dataJson = (JSONObject) dataJson.get(id_movie);
+        String id = id_movie;
+        try {
             String titleType = dataJson.getJSONObject("title").getString("titleType");
-            String title = dataJson.getJSONObject("title").getString("title");
-            double rating = 0;
-            if(dataJson.getJSONObject("ratings").getBoolean("canRate"))
-                rating = dataJson.getJSONObject("ratings").getDouble("rating");
-            Movie movie = new Movie(id, rating, titleType, title);
-            System.out.println(movie);
-            return movie;
+            if(titleType.toLowerCase().contains("movie")){
+                String title = dataJson.getJSONObject("title").getString("title");
+                double rating = 0;
+                Boolean canRate = dataJson.getJSONObject("ratings").getBoolean("canRate");
+                if(canRate)
+                    rating = dataJson.getJSONObject("ratings").getDouble("rating");
+
+                String releaseDate = (String) dataJson.get("releaseDate");
+                int runningTimeInMinutes = dataJson.getJSONObject("title").getInt("runningTimeInMinutes");
+                Movie movie = new Movie(id, rating, titleType, title, canRate, releaseDate, runningTimeInMinutes);
+                System.out.println(movie);
+                return movie;
+            }else{
+                System.out.println(id+" not a movie : "+titleType);
+            }
+        }catch (JSONException e){
+            System.err.println(id);
+            e.printStackTrace();
+        }catch (ClassCastException e){
+            System.err.println(id);
+            e.printStackTrace();
         }
         return null;
     }
+
+    //titletype
+
+
+    public static void saveAlMovies(){
+
+        Map<String, Integer> allMovies = new HashMap<>();
+        try {
+            FileReader filereader = new FileReader(ALL_FILMO_PATH);
+            CSVReader csvReader = new CSVReader(filereader);
+            List<String[]> allData = csvReader.readAll();
+
+            for (int i= 1; i<allData.size(); i++) {
+                allMovies.put(allData.get(i)[1], 1);
+            }
+
+            filereader = new FileReader(TOP_RATED_PATH);
+            csvReader = new CSVReader(filereader);
+            allData = csvReader.readAll();
+
+            for (int i= 1; i<allData.size(); i++) {
+                allMovies.put(allData.get(i)[1], 1);
+            }
+
+            FileWriter outputfile = null;
+            File file = new File(MOVIES_PATH);
+            try {
+                outputfile = new FileWriter(file, true);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            CSVWriter writer = new CSVWriter(outputfile);
+
+            List<String[]> data = new ArrayList<String[]>();
+            if(!file.exists())
+                data.add(new String[] { "id", "rate", "title", "canRate", "releaseDate", "runningTimeInMinutes" });
+
+            for(String id_movie : allMovies.keySet()){
+                System.out.println(id_movie);
+                GetMetaData movie_data = new GetMetaData(id_movie);
+                Movie movie = movie_data.getMovie();
+                if(movie != null){
+                    data.add(movie.toArray());
+                }
+            }
+            writer.writeAll(data);
+            writer.close();
+
+
+
+
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
+
+    }
+
 }

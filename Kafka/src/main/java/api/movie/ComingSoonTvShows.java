@@ -13,7 +13,7 @@ public class ComingSoonTvShows {
     private int count = 0;
 
     public ComingSoonTvShows() {
-        response = ApiResponse.getResponseApiList(url);
+        response = ApiResponse.getResponseApi(url);
         dataArray = response.getBody().getArray();
     }
 

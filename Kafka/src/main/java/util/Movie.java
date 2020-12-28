@@ -4,18 +4,25 @@ import org.json.JSONObject;
 
 public class Movie {
     String id;
-    double rate;
+    double rate= 0;
     String title;
     String titletype;
+    boolean canRate;
+    String releaseDate;
+    int runningTimeInMinutes;
 
     public Movie(){
 
     }
 
-    public Movie(String id, String titletype, String title) {
+    public Movie(String id, double rate, String titletype, String title, boolean canRate, String releaseDate, int runningTimeInMinutes) {
         this.id = id;
+        this.rate = rate;
         this.title = title;
         this.titletype = titletype;
+        this.canRate = canRate;
+        this.releaseDate = releaseDate;
+        this.runningTimeInMinutes = runningTimeInMinutes;
     }
 
     public Movie(String id, double rate, String title, String titletype) {
@@ -66,6 +73,9 @@ public class Movie {
                 ", rate=" + rate +
                 ", title='" + title + '\'' +
                 ", titletype='" + titletype + '\'' +
+                ", canRate='" + canRate + '\'' +
+                ", releaseDate='" + releaseDate + '\'' +
+                ", runningTimeInMinutes='" + runningTimeInMinutes + '\'' +
                 '}';
     }
 
@@ -76,5 +86,9 @@ public class Movie {
         movieJson.put("title", title);
         movieJson.put("titletype", titletype);
         return movieJson;
+    }
+
+    public String[] toArray(){
+        return new String[]{id, String.valueOf(rate), titletype, title, String.valueOf(canRate), releaseDate, String.valueOf(runningTimeInMinutes)};
     }
 }

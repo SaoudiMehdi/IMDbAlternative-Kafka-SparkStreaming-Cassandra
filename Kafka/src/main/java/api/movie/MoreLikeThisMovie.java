@@ -7,7 +7,7 @@ import org.json.JSONArray;
 import util.Movie;
 
 public class MoreLikeThisMovie {
-    String url = "https://imdb8.p.rapidapi.com/title/get-more-like-this?tconst=";
+    public String url = "https://imdb8.p.rapidapi.com/title/get-more-like-this?tconst=";
     private HttpResponse<JsonNode> response;
     private JSONArray dataArray;
 
@@ -15,7 +15,7 @@ public class MoreLikeThisMovie {
 
     public MoreLikeThisMovie(String id_movie) {
         url += id_movie;
-        response = ApiResponse.getResponseApiList(url);
+        response = ApiResponse.getResponseApi(url);
         dataArray = response.getBody().getArray();
     }
 
