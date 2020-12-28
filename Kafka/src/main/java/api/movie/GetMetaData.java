@@ -24,9 +24,9 @@ public class GetMetaData {
     private HttpResponse<JsonNode> response;
     private JSONObject dataJson = null;
     public String url = "https://imdb8.p.rapidapi.com/title/get-meta-data?ids=";
-    private static final String ALL_FILMO_PATH = "src/main/resources/movie_actor/allFilmography.csv";
+    private static final String ALL_KNOWN_FOR_PATH = "src/main/resources/movie_actor/actorKnownFor.csv";
     private static final String TOP_RATED_PATH = "src/main/resources/movie/topRatedMovies.csv";
-    private static final String MOVIES_PATH = "src/main/resources/movie/movies.csv";
+    private static final String MOVIES_PATH = "src/main/resources/movie/knownMovies.csv";
 
     private int count = 0;
     private String id_movie;
@@ -69,14 +69,12 @@ public class GetMetaData {
         return null;
     }
 
-    //titletype
-
 
     public static void saveAlMovies(){
 
         Map<String, Integer> allMovies = new HashMap<>();
         try {
-            FileReader filereader = new FileReader(ALL_FILMO_PATH);
+            FileReader filereader = new FileReader(ALL_KNOWN_FOR_PATH);
             CSVReader csvReader = new CSVReader(filereader);
             List<String[]> allData = csvReader.readAll();
 
@@ -92,6 +90,8 @@ public class GetMetaData {
                 allMovies.put(allData.get(i)[1], 1);
             }
 
+            System.out.println(allMovies.keySet().size());
+
             FileWriter outputfile = null;
             File file = new File(MOVIES_PATH);
             try {
@@ -102,8 +102,8 @@ public class GetMetaData {
             CSVWriter writer = new CSVWriter(outputfile);
 
             List<String[]> data = new ArrayList<String[]>();
-            if(!file.exists())
-                data.add(new String[] { "id", "rate", "title", "canRate", "releaseDate", "runningTimeInMinutes" });
+
+            data.add(new String[] { "id", "rate", "title", "canRate", "releaseDate", "runningTimeInMinutes" });
 
             for(String id_movie : allMovies.keySet()){
                 System.out.println(id_movie);
