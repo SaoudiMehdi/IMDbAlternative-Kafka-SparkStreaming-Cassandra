@@ -46,19 +46,19 @@ public class ApiResponse {
                     .header("x-rapidapi-key", API_KEY)
                     .asJson();
 
-            System.out.println("1"+response.getBody());
+            //System.out.println("1"+response.getBody());
             if (response==null  || (response.getBody().getArray().get(0) instanceof JSONObject && response.getBody().getArray().getJSONObject(0).has("message"))) {
-                System.out.println("2"+response);
+                //System.out.println("2"+response);
                 response = SwitchAPI(url);
 
             }
-            System.out.println("3"+response);
+            //System.out.println("3"+response);
             return response;
 
         } catch (UnirestException e) {
             e.printStackTrace();
         }
-        System.out.println("4");
+        //System.out.println("4");
         try {
             TimeUnit.SECONDS.sleep(2);
         } catch (InterruptedException e) {
@@ -68,20 +68,20 @@ public class ApiResponse {
     }
 
     public static HttpResponse<JsonNode> SwitchAPI(String url) {
-        System.out.println("5");
+        //System.out.println("5");
         for(int i=index_api+1; i!=index_api ; i = (i+1)%API_KEYS.length) {
             try {
                 HttpResponse<JsonNode> response = Unirest.get(url)
                         .header("x-rapidapi-host", api)
                         .header("x-rapidapi-key", API_KEYS[i])
                         .asJson();
-                System.out.println("6"+response.getBody()+" "+i);
+                //System.out.println("6"+response.getBody()+" "+i);
                 if (!(response==null  || (response.getBody().getArray().get(0) instanceof JSONObject && response.getBody().getArray().getJSONObject(0).has("message")))) {
                     API_KEY = API_KEYS[i];
                     index_api = i;
                     return response;
                 }
-                System.out.println("6bis"+response+" "+i);
+                //System.out.println("6bis"+response+" "+i);
             } catch (UnirestException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

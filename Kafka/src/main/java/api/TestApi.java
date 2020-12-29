@@ -22,10 +22,13 @@ public class TestApi {
 
         //AllFilmography.saveAlFilmography();
 
-        GetMetaData.saveAlMovies();
+        //GetMetaData.saveAlMovies();
 
         //GetKnownFor.saveAllKnownFor();
 
+        //GetMetaData.deleteMoviesNotInList();
+
+        //GetMetaData.deleteCelbsWithoutMovie();
 
     }
 }

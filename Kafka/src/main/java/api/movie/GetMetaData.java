@@ -25,8 +25,12 @@ public class GetMetaData {
     private JSONObject dataJson = null;
     public String url = "https://imdb8.p.rapidapi.com/title/get-meta-data?ids=";
     private static final String ALL_KNOWN_FOR_PATH = "src/main/resources/movie_actor/actorKnownFor.csv";
+    private static final String ALL_KNOWN_FOR_PATH2 = "src/main/resources/movie_actor/actorKnownFor_v2.csv";
     private static final String TOP_RATED_PATH = "src/main/resources/movie/topRatedMovies.csv";
+    private static final String TOP_RATED_PATH2 = "src/main/resources/movie/topRatedMovies_v2.csv";
     private static final String MOVIES_PATH = "src/main/resources/movie/knownMovies.csv";
+    private static final String MOST_POPULAR_PATH = "src/main/resources/actor/mostPopularCelebs.csv";
+    private static final String MOST_POPULAR_PATH2 = "src/main/resources/actor/mostPopularCelebs2.csv";
 
     private int count = 0;
     private String id_movie;
@@ -122,6 +126,127 @@ public class GetMetaData {
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
+
+
+    }
+
+
+    public static void deleteMoviesNotInList(){
+        Map<String, Integer> allMovies = new HashMap<>();
+        try {
+            FileReader filereader = new FileReader(MOVIES_PATH);
+            CSVReader csvReader = new CSVReader(filereader);
+            List<String[]> allData = csvReader.readAll();
+
+            for (int i= 1; i<allData.size(); i++) {
+                allMovies.put(allData.get(i)[0], 1);
+            }
+
+            filereader = new FileReader(TOP_RATED_PATH);
+            csvReader = new CSVReader(filereader);
+            allData = csvReader.readAll();
+            List<String[]> topRatedData = new ArrayList<>();
+            topRatedData.add(allData.get(0));
+            for (int i= 1; i<allData.size(); i++) {
+                if(allMovies.containsKey(allData.get(i)[1]))
+                    topRatedData.add(allData.get(i));
+                else{
+                    System.out.println(allData.get(i));
+                    System.out.println(allData.get(i)[0]+" : 0 : "+allData.get(i)[1]);
+                }
+            }
+
+
+            FileWriter outputfile = null;
+            File file = new File(TOP_RATED_PATH2);
+            try {
+                outputfile = new FileWriter(file, true);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            CSVWriter writer = new CSVWriter(outputfile);
+            writer.writeAll(topRatedData);
+            writer.close();
+
+            filereader = new FileReader(ALL_KNOWN_FOR_PATH);
+            csvReader = new CSVReader(filereader);
+            allData = csvReader.readAll();
+            List<String[]> actorKnownFor = new ArrayList<>();
+            actorKnownFor.add(allData.get(0));
+            for (int i= 1; i<allData.size(); i++) {
+                if(allMovies.containsKey(allData.get(i)[1]))
+                    actorKnownFor.add(allData.get(i));
+                else{
+                    System.out.println(allData.get(i)[0]+" : 1 : "+allData.get(i)[1]);
+                }
+            }
+
+
+            outputfile = null;
+            file = new File(ALL_KNOWN_FOR_PATH2);
+            try {
+                outputfile = new FileWriter(file, true);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            writer = new CSVWriter(outputfile);
+            writer.writeAll(actorKnownFor);
+            writer.close();
+
+
+
+
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
+
+
+    }
+
+    public static void deleteCelbsWithoutMovie(){
+        Map<String, Integer> allActors = new HashMap<>();
+        try {
+            FileReader filereader = new FileReader(ALL_KNOWN_FOR_PATH);
+            CSVReader csvReader = new CSVReader(filereader);
+            List<String[]> allData = csvReader.readAll();
+
+            for (int i= 1; i<allData.size(); i++) {
+                allActors.put(allData.get(i)[0], 1);
+            }
+
+
+
+            filereader = new FileReader(MOST_POPULAR_PATH);
+            csvReader = new CSVReader(filereader);
+            allData = csvReader.readAll();
+            List<String[]> celbsActors = new ArrayList<>();
+            celbsActors.add(allData.get(0));
+            for (int i= 1; i<allData.size(); i++) {
+                if(allActors.containsKey(allData.get(i)[0]))
+                    celbsActors.add(allData.get(i));
+                else{
+                    System.out.println(allData.get(i)[0]);
+                }
+            }
+
+
+            FileWriter outputfile = null;
+            File file = new File(MOST_POPULAR_PATH2);
+            try {
+                outputfile = new FileWriter(file, true);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            CSVWriter writer = new CSVWriter(outputfile);
+            writer.writeAll(celbsActors);
+            writer.close();
+
+
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
 
 
     }
