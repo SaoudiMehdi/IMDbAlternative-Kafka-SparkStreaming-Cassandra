@@ -32,6 +32,7 @@ public class GetMetaData {
     private static final String MOST_POPULAR_PATH = "src/main/resources/actor/mostPopularCelebs.csv";
     private static final String MOST_POPULAR_PATH2 = "src/main/resources/actor/mostPopularCelebs2.csv";
 
+
     private int count = 0;
     private String id_movie;
 

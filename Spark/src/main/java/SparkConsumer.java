@@ -12,7 +12,7 @@ import java.util.*;
 
 public class SparkConsumer {
 
-    private static final String targetTopic = "ActorTopic";
+    private static final String targetTopic = "NewsTopic";
 
 
     public static void main(String[] args) {

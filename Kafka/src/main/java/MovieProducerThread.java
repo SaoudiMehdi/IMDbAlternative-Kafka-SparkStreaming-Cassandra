@@ -5,8 +5,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.stream.Stream;
@@ -20,13 +18,12 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.json.JSONObject;
 import util.Movie;
-import util.SDate;
 
 
 public class MovieProducerThread implements Runnable{
 
     private static String KafkaBrokerEndpoint = "localhost:9092";
-    private static String targetTopic = "NewsTopic";
+    private static String targetTopic = "MovieTopic";
 
     private Producer<String, String> ProducerProperties(){
         Properties properties = new Properties();
@@ -42,22 +39,15 @@ public class MovieProducerThread implements Runnable{
 
     public void run(){
 
-        Producer<String, String> newsProducer = ProducerProperties();
-        List<String> listActors = new ArrayList();
-        SDate dateCourante = new SDate();
-        while (true){
-            try {
-                SDate datetemp = new SDate();
-                if(listActors.size() == 0 || !datetemp.equals(dateCourante)){
-                    // n3mer list actors oooook
-                }
+        Producer<String, String> ActorProducer = ProducerProperties();
 
-                for(int i = 0; i<3; i++) {
+        try {
+            TopRatedMovies topRatedMovies = new TopRatedMovies();
+            Movie movie;
 
-                /*News news;
-
+            while ((movie = topRatedMovies.getNextMovie()) != null){
                 final ProducerRecord<String, String> actorRecord = new ProducerRecord<String, String>(
-                        targetTopic, id_actor, news.toString());
+                        targetTopic, movie.getId(), movie.toString());
 
                 ActorProducer.send(actorRecord, (metadata, exception) -> {
                     if(metadata != null){
@@ -66,19 +56,14 @@ public class MovieProducerThread implements Runnable{
                     else{
                         System.out.println("Error Sending Record -> "+ actorRecord.value());
                     }
-                });*/
+                });
 
-                    Thread.sleep(40000);
-                }
-            }
-            catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.sleep(500);
             }
         }
-
-        //JSONParser parser = new JSONParser(); JSONObject json = (JSONObject) parser.parse(stringToParse);
-
-
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 
