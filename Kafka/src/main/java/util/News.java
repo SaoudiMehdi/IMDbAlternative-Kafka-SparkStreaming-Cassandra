@@ -1,5 +1,7 @@
 package util;
 
+import org.json.JSONObject;
+
 public class News {
     String body;
     String head;
@@ -56,5 +58,15 @@ public class News {
 
     public void setPublishTime(String publishTime) {
         this.publishTime = publishTime;
+    }
+
+    public String jsonAsString(){
+        JSONObject newsJson = new JSONObject();
+        newsJson.put("body",body);
+        newsJson.put("head",head);
+        newsJson.put("id",id);
+        newsJson.put("link",link);
+        newsJson.put("publishTime",publishTime);
+        return newsJson.toString();
     }
 }
