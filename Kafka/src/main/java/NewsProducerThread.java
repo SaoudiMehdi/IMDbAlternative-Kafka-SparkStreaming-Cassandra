@@ -67,7 +67,7 @@ public class NewsProducerThread implements Runnable{
         CSVReader csvReader;
         List<String[]> allData;
         int day, month;
-        int nombre_actors = 4;
+        int nombre_actors = 6;
         Date date;
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");;
         String hour_minute;
