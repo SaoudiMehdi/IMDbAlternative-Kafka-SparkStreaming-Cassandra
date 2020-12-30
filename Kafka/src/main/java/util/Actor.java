@@ -84,6 +84,16 @@ public class Actor {
         return actorJson;
     }
 
+    public String jsonAsString(){
+        JSONObject actorJson = new JSONObject();
+        actorJson.put("id", id);
+        actorJson.put("name", name);
+        actorJson.put("birthDate", birthDate);
+        actorJson.put("birthPlace", birthPlace);
+        actorJson.put("gender", gender);
+        return actorJson.toString();
+    }
+
     public String[] toArray(){
         return new String[]{id, name, birthDate, birthPlace, gender};
     }

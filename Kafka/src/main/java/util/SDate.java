@@ -14,7 +14,15 @@ public class SDate {
         year = localDate.getYear();
         month = localDate.getMonthValue();
         day = localDate.getDayOfMonth();
+        
     }
+
+    public SDate(int year, int month, int day){
+        this.year = year;
+        this.month = month;
+        this.day = day;
+    }
+
 
     public int getYear() {
         return year;
@@ -50,8 +58,17 @@ public class SDate {
                 day == sDate.day;
     }
 
+    public boolean sameMonthDay(int month, int day){
+        return month == this.month && day == this.day;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(year, month, day);
+    }
+
+    @Override
+    public String toString() {
+        return year+"-"+month+"-"+day;
     }
 }
