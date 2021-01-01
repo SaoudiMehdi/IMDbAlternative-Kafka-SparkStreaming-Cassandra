@@ -3,6 +3,8 @@ package api.actor;
 import api.ApiResponse;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,6 +12,10 @@ import util.Movie;
 import util.News;
 import util.SDate;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +25,7 @@ public class GetRecentNews {
     private HttpResponse<JsonNode> response;
     private JSONArray dataArray = null;
     public String url = "https://imdb8.p.rapidapi.com/actors/get-all-news?nconst=";
+    private final String NEWS_PATH = "src/main/resources/actor/recentNews.csv";
     private int count = 0;
     private String id_actor;
 
@@ -53,4 +60,6 @@ public class GetRecentNews {
         }
         return null;
     }
+
+
 }

@@ -22,6 +22,10 @@ public class CreateTable {
                     + "(idActor varchar, idMovie varchar, PRIMARY KEY (idActor, idMovie))";
             connector.getSession().execute(createActorMovieTable);
 
+            final String createRecentNewsTable = "CREATE TABLE IF NOT EXISTS imdb_keyspace1.newsTable"
+                    + "(id varchar, body varchar, head varchar, link varchar, id_actor varchar, publishTime varchar PRIMARY KEY (id))";
+            connector.getSession().execute(createRecentNewsTable);
+
 
             connector.close();
 

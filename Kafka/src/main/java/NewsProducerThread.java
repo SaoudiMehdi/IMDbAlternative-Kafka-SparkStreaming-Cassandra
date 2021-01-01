@@ -100,7 +100,7 @@ public class NewsProducerThread implements Runnable{
                                 Biography bioActor = new Biography(id_act);
                                 Actor actor = bioActor.getActor();
                                 if(actor != null){
-                                    System.out.println(actor);
+                                    //System.out.println(actor);
                                     ActorProducerThread actorProducerThread = new ActorProducerThread(actor);
                                     actorProducerThread.run();
                                     addActortoFile(actor);
