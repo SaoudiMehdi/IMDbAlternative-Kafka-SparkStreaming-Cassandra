@@ -29,13 +29,13 @@ l'opération de visualisation par la suite.
 ├── Kafka-SparkStreaming-Cassandra
 │   ├── Kafka
 │   │   ├── src
-│   │   │   ├── main
-│   │   │   │   └── java
-│   │   │   │         ├── api
-|   |   |   |         ├── ActorProducerThread.java
-│   │   │   |         └── NewsProducerThread.java
-│   │   │   │  
-│   │   │   │   
+│   │   │   └── main
+│   │   │      └── java
+│   │   │            ├── api
+|   |   |            ├── ActorProducerThread.java
+│   │   │            └── NewsProducerThread.java
+│   │   │     
+│   │   │      
 └── └── Spark
         └── src
             └── main
