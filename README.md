@@ -7,7 +7,7 @@ différents acteurs et films.
 L'utilité de Kafka est de pouvoir récupérer l'ensemble des données via l'API. Dans un premier temps, vous allez travailler sur la partie streaming : vous pouvez
 récupérer les "news" relatives aux acteurs ainsi qu'une liste de ces derniers en temps réel. Puis, pour la partie des données statiques, vous pouvez récupérer un 
 ensemble des données et les stocker dans des fichiers .csv afin de les exploiter ultérieurement.
-* dossier api : contient deux sous-dossiers. Le dossier "actor" pour la récupération des données statiques des acteurs et le dossier movie pour la récupération des
+* dossier api : contient deux sous-dossiers. Le dossier "actor" pour la récupération des données statiques des acteurs et le dossier "movie" pour la récupération des
 données statiques des films.
 * ActorProducerThread.java : Permet la récupération des données en temps réel des différents acteurs.
 * NewsProducerThread : Permet la récupération des données en temps réel des différents news relatifs aux acteurs.
