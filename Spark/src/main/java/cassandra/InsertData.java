@@ -34,7 +34,7 @@ public class InsertData {
     public void insertDataMovies(DBConnector connector) {
         try {
 
-            final String insertQuery = "INSERT INTO imdb_keyspace1.movies (idMovie, rating, title,releaseDate, runningTimeInMinutes) "
+            final String insertQuery = "INSERT INTO imdb_keyspace2.movies (idMovie, rating, title,releaseDate, runningTimeInMinutes) "
                     + "VALUES (?,?,?,?,?)";
             PreparedStatement psInsert = connector.getSession().prepare(insertQuery);
 
@@ -56,7 +56,7 @@ public class InsertData {
     public void insertDataTopRatedMovies(DBConnector connector) {
         try {
 
-            final String insertQuery = "INSERT INTO imdb_keyspace1.topRatedMovies (idMovie, ranking) "
+            final String insertQuery = "INSERT INTO imdb_keyspace2.topRatedMovies (idMovie, ranking) "
                     + "VALUES (?,?)";
             PreparedStatement psInsert = connector.getSession().prepare(insertQuery);
 
@@ -78,7 +78,7 @@ public class InsertData {
     public void insertDataActors(DBConnector connector) {
         try {
 
-            final String insertQuery = "INSERT INTO imdb_keyspace1.actors (idActor, name, birthDate, birthPlace, gender) "
+            final String insertQuery = "INSERT INTO imdb_keyspace2.actors (idActor, name, birthDate, birthPlace, gender) "
                     + "VALUES (?,?,?,?,?)";
             PreparedStatement psInsert = connector.getSession().prepare(insertQuery);
 
@@ -99,7 +99,7 @@ public class InsertData {
     public void insertDataActorMovie(DBConnector connector) {
         try {
 
-            final String insertQuery = "INSERT INTO imdb_keyspace1.actorMovies (idActor , idMovie) "
+            final String insertQuery = "INSERT INTO imdb_keyspace2.actorMovies (idActor , idMovie) "
                     + "VALUES (?,?)";
             PreparedStatement psInsert = connector.getSession().prepare(insertQuery);
 
@@ -117,10 +117,10 @@ public class InsertData {
         }
     }
 
-    public void insertDataNews(DBConnector connector) {
+    /*public void insertDataNews(DBConnector connector) {
         try {
 
-            final String insertQuery = "INSERT INTO imdb_keyspace1.newsTable (id, body, head, link, id_actor, publishTime) "
+            final String insertQuery = "INSERT INTO imdb_keyspace2.newsTable (id, body, head, link, id_actor, publishTime, common_words) "
                     + "VALUES (?,?,?,?,?,?)";
             PreparedStatement psInsert = connector.getSession().prepare(insertQuery);
 
@@ -130,13 +130,13 @@ public class InsertData {
 
             for (int i= 1; i<allData.size(); i++) {
 
-                BoundStatement bsInsert = psInsert.bind(allData.get(i)[0],allData.get(i)[1],allData.get(i)[3],allData.get(i)[5],allData.get(i)[6]);
+                BoundStatement bsInsert = psInsert.bind(allData.get(i)[0],allData.get(i)[1],allData.get(i)[3],allData.get(i)[5],allData.get(i)[6],allData.get(i)[7]);
                 connector.getSession().execute(bsInsert);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
 }

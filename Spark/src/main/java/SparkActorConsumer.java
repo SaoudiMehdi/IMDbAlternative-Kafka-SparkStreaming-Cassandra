@@ -30,7 +30,7 @@ public class SparkActorConsumer implements Runnable {
         Set<String> topics = Collections.singleton(targetTopic);
         DBConnector connector = new DBConnector();
         connector.connectdb("localhost", 9042);
-        final String insertQuery = "INSERT INTO imdb_keyspace1.actors (idActor, name, birthDate, birthPlace, gender) "
+        final String insertQuery = "INSERT INTO imdb_keyspace2.actors (idActor, name, birthDate, birthPlace, gender) "
                 + "VALUES (?,?,?,?,?)";
         PreparedStatement psInsert = connector.getSession().prepare(insertQuery);
         JavaPairInputDStream<String, String> directKafkaStream = KafkaUtils.createDirectStream(ssc, String.class, String.class, StringDecoder.class, StringDecoder.class, kafkaParams, topics);
