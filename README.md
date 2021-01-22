@@ -13,7 +13,7 @@ données statiques des films.
 * NewsProducerThread : Permet la récupération des données en temps réel des différents news relatifs aux acteurs.
 ### Pour la partie Spark :
 L'utilité de Spark dans ce projet et de faire un Streaming de données via Spark Streaming en exploitant les données en temps réel récupérées par Kafka et établir
-un simple traitement de données. Le traitement de données permet de déterminer les "tags" des différents news(les mots les plus répétitifs dans un article en éliminant les mots qui ne referent pas à l'article en utilisant une liste stopword.txt).
+un simple traitement de données. Le traitement de données permet de déterminer les "tags" des différents news(les mots les plus répétitifs dans un article en éliminant les mots qui ne référent pas à l'article en utilisant une liste stopword.txt situé dans ressources).
 * SparkActorConsumer.java : Permet de faire le streaming d'une liste des acteurs récupérée en temps réel et la stocke sur Cassandra.
 * SparkNewsConsumer.java : Permet de faire le streaming d'une liste des news( différents articles écrit sur les acteurs en temps réel), puis établit le traitement
 en déterminant les mots les plus mentionnés(tags). Le but est de faciliter la recherche d'un article par un utilisateur à l'aide de ces tags déterminés.
