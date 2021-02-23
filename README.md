@@ -1,6 +1,6 @@
 # Kafka-SparkStreaming-Cassandra(Pipeline)
 
-## Tools : Java 11, Kafka, SparkStreaming, Cassandra
+## Tools : Java 11, API REST, Kafka, SparkStreaming, Cassandra
 Pipeline (Kafka - Spark Streaming - Cassandra) fonctionne en exploitant l'API IMDb Alternative qui vous donne l'opportunité de manipuler les données relatives aux
 différents acteurs et films.
 ## Modèle d’arborescence 
